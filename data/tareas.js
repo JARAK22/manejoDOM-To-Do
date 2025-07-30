@@ -1,17 +1,17 @@
 export const tareas = [
     {
         id: 1,
-        tarea: "Tarea 1",
+        tarea: "Hacer la tarea",
         completada: false
     },
     {
         id: 2,
-        tarea: "Tarea 2",
+        tarea: "Hacer la cena",
         completada: false
     },
     {
         id: 3,
-        tarea: "Tarea 3",
+        tarea: "Hacer el almuerzo",
         completada: false
     }
 ]
