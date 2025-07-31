@@ -21,11 +21,8 @@ let tareasOriginales = cargarTareasDesdeLocalStorage() // se ejecuta solo una ve
 
 function mostrarTareas(tareasAMostrar = tareasOriginales) {
     agregarTarea.disabled = true
-    // Guardar en localStorage cada vez que se actualicen las tareas
-    localStorage.setItem("tareas", JSON.stringify(tareasOriginales))
     tablaBody.innerHTML = ""
     tareasAMostrar.forEach((tarea, index) => {
-        console.log(index)
         setTimeout(() => {
             const tr = document.createElement("tr")
             tr.innerHTML = `
@@ -37,7 +34,7 @@ function mostrarTareas(tareasAMostrar = tareasOriginales) {
             </td>
                 `
             tablaBody.appendChild(tr)
-        }, 400 * index)
+        }, 100 * index)
     })
 }
 
@@ -61,6 +58,7 @@ tablaBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("completar")) {
         const index = parseInt(e.target.getAttribute("data-index"))
         tareasOriginales[index].completada = tareasOriginales[index].completada ? false : true
+        localStorage.setItem("tareas", JSON.stringify(tareasOriginales))
         mostrarTareas()
     }
 
@@ -68,6 +66,7 @@ tablaBody.addEventListener("click", (e) => {
         const index = parseInt(e.target.getAttribute("data-index"))
         console.log(index)
         tareasOriginales.splice(index, 1)
+        localStorage.setItem("tareas", JSON.stringify(tareasOriginales))
         mostrarTareas()
     }
 })
@@ -79,6 +78,7 @@ agregarTarea.addEventListener("click", () => {
     console.log("Guardando tarea")
     tareasOriginales.push({ id: tareasOriginales.length + 1, tarea, completada: false })
     console.log(tareasOriginales)
+    localStorage.setItem("tareas", JSON.stringify(tareasOriginales))
     mostrarTareas()
     inputTarea.value = ""
 })
